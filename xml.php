@@ -1,5 +1,5 @@
 <?php
-
+// DB data
 $username="admin";
 $password="admin";
 $database="events";
