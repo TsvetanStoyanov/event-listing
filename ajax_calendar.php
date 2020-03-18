@@ -129,17 +129,31 @@ switch ($_POST['req'])
     case "show" :
     $evt = $calLib->get($_POST['date']); 
     $map = $calLib->map($_POST['date']); 
+    $gps = $calLib->gps($_POST['date']); 
     // var_dump($map);
     ?>
     <form onsubmit="return cal.save()">
       
-      <h1><?php echo ( $evt==false ) ? 'ADD' : 'EDIT' ; ?>EVENT</h1>
+      <h1><?php echo ( $evt == false ) ? 'ADD' : 'EDIT' ; ?>EVENT</h1>
 
       <div id="date_event"><?php echo $_POST['date']?></div>
-      <div>event description</div>
-      <textarea id="details_event"><?php echo ($evt==false) ? '' : $evt ;?></textarea>
-      <div>event location</div>
-      <textarea id="map_event"><?php echo ($map==false) ? '' : $map ; ?></textarea>
+      <div class="left">
+        <span>event description</span>
+        <textarea id="details_event"><?php echo ($evt==false) ? '' : $evt ;?></textarea>
+      </div>
+      <div class="left">
+        <span>event location</span>
+        <textarea id="map_event"><?php echo ($map==false) ? '' : $map ; ?></textarea>
+      </div>
+      <div class="left">
+        <span>LAT</span>
+        <textarea id="gps_event"><?php echo ($gps==false) ? '' : $gps ; ?></textarea>
+        
+      </div>
+
+
+
+      <div class="clear"></div>
       <input type="button" value="Delete" onclick="cal.del()"/>
       <input type="submit" value="Save"/>
     </form>
@@ -150,7 +164,7 @@ switch ($_POST['req'])
 
   /* [SAVE THE EVENT] */
   case "save" :
-    echo $calLib->save($_POST['date'], $_POST['details'], $_POST['map']) ? "OK" : "ERR" ;
+    echo $calLib->save($_POST['date'], $_POST['details'], $_POST['map'], $_POST['gps']) ? "OK" : "ERR" ;
     break;
 
   /* [DELETE EVENT] */

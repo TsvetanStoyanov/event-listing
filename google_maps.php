@@ -32,6 +32,13 @@
         }
       };
 
+
+
+ 
+
+
+
+
         function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(42.709412, 23.395542),
@@ -39,11 +46,18 @@
         });
         var infoWindow = new google.maps.InfoWindow;
 
+
+        var link = window.location.href; 
+        // replace links and get xml file
+        var $res = link.replace("google_maps.php?", "xml.php?");
+        
           // Change this depending on the name of your PHP or XML file
-          downloadUrl('http://localhost/xml.php', function(data) {
-            var xml = data.responseXML;
-            var markers = xml.documentElement.getElementsByTagName('marker');
-            Array.prototype.forEach.call(markers, function(markerElem) {
+          downloadUrl( $res, 
+            function(data) 
+              {
+              var xml = data.responseXML;
+              var markers = xml.documentElement.getElementsByTagName('marker');
+              Array.prototype.forEach.call(markers, function(markerElem) {
               var id = markerElem.getAttribute('id');
               var name = markerElem.getAttribute('name');
               var address = markerElem.getAttribute('address');
@@ -73,6 +87,8 @@
               });
             });
           });
+
+          
         }
 
 

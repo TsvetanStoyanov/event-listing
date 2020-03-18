@@ -50,6 +50,7 @@ var cal =
     data.append('date', document.getElementById('date_event').innerHTML);
     data.append('details', document.getElementById('details_event').value);
     data.append('map', document.getElementById('map_event').value);
+    data.append('gps', document.getElementById('gps_event').value);
     // AJAX
     var xhr = new XMLHttpRequest();
     xhr.open('POST', "ajax_calendar.php", true);

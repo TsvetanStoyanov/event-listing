@@ -121,11 +121,9 @@ class events
   
     $sql = "SELECT * FROM `events_list` WHERE `date`=?";
     $evt = $this->fetch($sql, [$date]);  
-    // var_dump( count($evt));
-    $result_details = $evt[0]['details'];
 
-      $result_details = $evt[0]['details'];
-      return count($evt)== 0 ? false : $result_details ;     
+    $result_details = $evt[0]['details'];
+    return count($evt)== 0 ? false : $result_details ;
     }
 
   function map($date) 
@@ -135,11 +133,26 @@ class events
   
     $sql = "SELECT * FROM `events_list` WHERE `date`=?";
     $evt = $this->fetch($sql, [$date]);  
-    // var_dump( count($evt));
-    $result_details = $evt[0]['details'];
+    
+    
 
     $result_map = $evt[0]['map'];
-    return count($evt)== 0 ? false : $result_map;
+    return count($evt) == 0 ? false : $result_map;
+    }
+
+
+
+  function gps($date) 
+    {
+    // map() : map event for the selected date
+    // PARAM $date : date
+  
+    $sql = "SELECT * FROM `markers` WHERE `date` = ?";
+    $evt = $this->fetch($sql, [$date]);  
+    
+
+    $result_gps = $evt[0]['lat'];
+    return count($evt) == 0 ? false : $result_gps;
     }
 
     function list_events() 
@@ -147,7 +160,7 @@ class events
     // list_events() : get all events descending
   
     $sql = "SELECT * FROM `events_list` ORDER BY `date` DESC";
-    $evt = $this->fetch($sql);  
+    $evt = $this->fetch($sql);
     
     $result_list = $evt;
     return $result_list;
@@ -162,10 +175,11 @@ class events
   
       $sql = "SELECT * FROM `events_list` WHERE `date` BETWEEN ? AND ?";
       $evt = $this->fetch($sql, [$start, $end], "date", "details", "map");
+      
       return count($evt)== 0 ? false : $evt ;
     }
 
-  function save($date, $details, $map) 
+  function save($date, $details, $map, $gps) 
     {
     // save() : create/update event on specified date
     // PARAM $date : date
@@ -173,12 +187,15 @@ class events
   
     $sql = "REPLACE INTO `events_list` (`date`, `details`, `map`) VALUES (?, ?, ?)";
     $result[0] = $this->exec($sql, [$date, $details, $map]);
+
+    // var_dump($gps);
+
+
     
-    
-    // insert
-    $sql2 = "INSERT INTO `markers` (`name`, `address`, `lat`, `lng`, `type`)
-    VALUES (?, ?, '43.709810', '24.394342', ?)";
-    $result[1] = $this->exec($sql2, [$date, $details, $map]);
+    // insert to markers table
+    $sql2 = "REPLACE INTO `markers` (`date`, `address`, `lat`, `lng`, `type`) 
+                          VALUES (?, ?, ?, '24.394342', ?)";
+    $result[1] = $this->exec($sql2, [$date, $details, $gps, $map]);
     
     return $result;
     }
@@ -189,7 +206,13 @@ class events
     // PARAM $date : date
   
     $sql = "DELETE FROM `events_list` WHERE `date`=?";
-    return $this->exec($sql, [$date]);
+    $result[0] = $this->exec($sql, [$date]);
+
+    // delete markers google maps
+    $sql = "DELETE FROM `markers` WHERE `date`=?";
+    $result[1] = $this->exec($sql, [$date]);
+
+    return $result;
   }
 }
 $calLib = new events();

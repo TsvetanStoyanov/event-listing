@@ -7,6 +7,9 @@
   $today = strtotime("today");
   $monthNow = date("M", $today);
   $yearNow = date("Y", $today); 
+
+// var_dump($_GET['date']);
+
 ?>
 
 
@@ -69,13 +72,14 @@ $list = $calLib->list_events();
 
     foreach ($list as $k => $v) 
         {
+          $a = str_replace('-', '', $v['date']);
         ?>
         <tr>
         <td><?php echo $v['date'] ?></td>
         <td><?php echo $v['details'] ?></td>
-        <td><?php echo $v['map'] ?></td>
+        <td><?php echo $v['address'] ?></td>
         <td><?php echo $v['url_event'] ?></td>
-        <td><button>add to calendar</button></td>
+        <td><button><a href="google_maps.php?&date=<?php echo $a ?>">map</a></button></td>
         </tr>
     
         

@@ -1,20 +1,20 @@
 <?php
 
-$username = "admin";
-$password = "admin";
-$database = "events";
+$username ="admin";
+$password ="admin";
+$database ="events";
 
 
 
 function parseToXML($htmlStr)
-  {
-  $xmlStr = str_replace('<','&lt;',$htmlStr);
-  $xmlStr = str_replace('>','&gt;',$xmlStr);
-  $xmlStr = str_replace('"','&quot;',$xmlStr);
-  $xmlStr = str_replace("'",'&#39;',$xmlStr);
-  $xmlStr = str_replace("&",'&amp;',$xmlStr);
-  return $xmlStr;
-  }
+{
+$xmlStr =str_replace('<','&lt;',$htmlStr);
+$xmlStr =str_replace('>','&gt;',$xmlStr);
+$xmlStr =str_replace('"','&quot;',$xmlStr);
+$xmlStr =str_replace("'",'&#39;',$xmlStr);
+$xmlStr =str_replace("&",'&amp;',$xmlStr);
+return $xmlStr;
+}
 
 
 // Opens a connection to a MySQL server
@@ -32,8 +32,11 @@ if (!$db_selected)
   die ('Can\'t use db : ' . mysqli_error());
   }
 
+  // replace date and remove dashes
+  $sort = str_replace('-', '', $_GET['date']);
+
 // Select all the rows in the markers table
-$query = "SELECT * FROM `markers` WHERE 1";
+$query = 'SELECT * FROM `markers` WHERE `date` = '. $sort .'' ;
 $result = mysqli_query($connection, $query);
 if (!$result) 
   {
@@ -52,6 +55,7 @@ while ($row = @mysqli_fetch_assoc($result)){
   echo '<marker ';
   echo 'id="' . $row['id'] . '" ';
   echo 'name="' . parseToXML($row['name']) . '" ';
+  echo 'date="' . parseToXML($_GET['date']) . '" ';
   echo 'address="' . parseToXML($row['address']) . '" ';
   echo 'lat="' . $row['lat'] . '" ';
   echo 'lng="' . $row['lng'] . '" ';
@@ -63,4 +67,8 @@ while ($row = @mysqli_fetch_assoc($result)){
 // End XML file
 echo '</markers>';
 
+
 ?>
+
+
+
