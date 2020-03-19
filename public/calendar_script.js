@@ -53,6 +53,7 @@ var cal =
     data.append('map', document.getElementById('map_event').value);
     data.append('gps', document.getElementById('gps_event').value);
     data.append('lng', document.getElementById('lng_event').value);
+    data.append('link', document.getElementById('link_event').value);
     // AJAX
     var xhr = new XMLHttpRequest();
     xhr.open('POST', "ajax_calendar.php", true);
@@ -103,7 +104,6 @@ var cal =
 
 window.addEventListener("load", cal.list);
 
-
 var observe;
 if (window.attachEvent) 
   {
@@ -119,4 +119,3 @@ else
     element.addEventListener(event, handler, false);
     };
   }
-

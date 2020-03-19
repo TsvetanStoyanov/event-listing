@@ -32,13 +32,6 @@
         }
       };
 
-
-
- 
-
-
-
-
         function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(42.709412, 23.395542),

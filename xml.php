@@ -1,10 +1,8 @@
 <?php
-
+// db connection
 $username ="admin";
 $password ="admin";
 $database ="events";
-
-
 
 function parseToXML($htmlStr)
 {
@@ -15,8 +13,6 @@ $xmlStr =str_replace("'",'&#39;',$xmlStr);
 $xmlStr =str_replace("&",'&amp;',$xmlStr);
 return $xmlStr;
 }
-
-
 // Opens a connection to a MySQL server
 $connection = mysqli_connect ('localhost', $username, $password);
 
@@ -53,22 +49,15 @@ $ind = 0;
 while ($row = @mysqli_fetch_assoc($result)){
   // Add to XML document node
   echo '<marker ';
-  echo 'id="' . $row['id'] . '" ';
-  echo 'name="' . parseToXML($row['name']) . '" ';
   echo 'date="' . parseToXML($_GET['date']) . '" ';
-  echo 'address="' . parseToXML($row['address']) . '" ';
+  echo 'address="' . parseToXML($row['type']) . '" ';
   echo 'lat="' . $row['lat'] . '" ';
   echo 'lng="' . $row['lng'] . '" ';
-  echo 'type="' . $row['type'] . '" ';
+  echo 'link="' . $row['address'] . '" ';
   echo '/>';
   $ind = $ind + 1;
 }
 
 // End XML file
 echo '</markers>';
-
-
 ?>
-
-
-

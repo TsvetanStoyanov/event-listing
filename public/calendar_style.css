@@ -9,6 +9,10 @@ html, body, textarea, input
   {
   margin-top: -5px;
   }
+.mt-15
+  {
+  margin-top: -15px;
+  }
 .mt_10
   {
   margin-top: 10px;
@@ -16,6 +20,10 @@ html, body, textarea, input
 .ml_10
   {
   margin-left: 10px;
+  }
+.ml_15
+  {
+  margin-left: 15px;
   }
 
   /* struct divs in left side for responsive  */
@@ -40,7 +48,7 @@ html, body, textarea, input
   font-size: 1.2em;
   }
 
-/* [CALENDAR] */
+/* CALENDAR */
 #calendar
   {
   width: 100%;
