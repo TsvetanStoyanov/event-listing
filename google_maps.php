@@ -42,17 +42,17 @@
         function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(42.709412, 23.395542),
-          zoom: 12
+          zoom: 14
         });
         var infoWindow = new google.maps.InfoWindow;
 
-
+        //get link
         var link = window.location.href; 
         // replace links and get xml file
-        var $res = link.replace("google_maps.php?", "xml.php?");
+        var $converted_link = link.replace("google_maps.php?", "xml.php?");
         
           // Change this depending on the name of your PHP or XML file
-          downloadUrl( $res, 
+          downloadUrl( $converted_link, 
             function(data) 
               {
               var xml = data.responseXML;

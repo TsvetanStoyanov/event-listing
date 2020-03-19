@@ -1,10 +1,35 @@
-/* [SITE] */
+/* SITE */
 html, body, textarea, input
   {
   font-family: arial;
   }
- 
-/* [PERIOD SELECTOR] */
+
+/* margins */
+.mt-5
+  {
+  margin-top: -5px;
+  }
+.mt_10
+  {
+  margin-top: 10px;
+  }
+.ml_10
+  {
+  margin-left: 10px;
+  }
+
+  /* struct divs in left side for responsive  */
+  .left
+  {
+  float: left; 
+  }
+  /* clear all floats */
+.clear
+  {
+  clear: both;
+  }
+
+/* PERIOD SELECTOR */
 #selector
   {
   padding: 10px;
@@ -49,7 +74,7 @@ tr.day td
   overflow: hidden;
   }
 
-/* [ADD/EDIT EVENT] */
+/* ADD/EDIT EVENT */
 #event form
   {
   margin-top: 10px;
@@ -92,11 +117,42 @@ tr:nth-child(even)
   background-color: #dddddd;
   }
 
-.left
+  /* design buttons */
+.button_create
   {
-  float: left; 
+  background-color: #4CAF50;
+  text-decoration: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  padding: 13px 30px;
+  border: none;
   }
-.clear
+
+.button_delete
   {
-  clear: both;
+  background-color: rgb(245, 24, 24);
+  text-decoration: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  padding: 13px 30px;
+  border: none;
+  }
+  
+.small_btn_info
+  {
+  background-color: rgb(37, 186, 245);
+  text-decoration: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  display: inline-block;
+  padding: 5px;
+  position: absolute;
   }

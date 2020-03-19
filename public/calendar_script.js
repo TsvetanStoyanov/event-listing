@@ -41,7 +41,8 @@ var cal =
     xhr.send(data);
     },
 
-  save: function() {
+  save: function() 
+    {
   // save() : save event for selected day
 
     // DATA
@@ -51,6 +52,7 @@ var cal =
     data.append('details', document.getElementById('details_event').value);
     data.append('map', document.getElementById('map_event').value);
     data.append('gps', document.getElementById('gps_event').value);
+    data.append('lng', document.getElementById('lng_event').value);
     // AJAX
     var xhr = new XMLHttpRequest();
     xhr.open('POST', "ajax_calendar.php", true);
@@ -67,7 +69,7 @@ var cal =
       };
     xhr.send(data);
     return false;
-  },
+    },
 
   del: function() 
     {
@@ -117,3 +119,4 @@ else
     element.addEventListener(event, handler, false);
     };
   }
+
