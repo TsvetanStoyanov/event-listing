@@ -175,7 +175,7 @@ class events
     function list_events($date) 
         {
         // list_events() : get all events by month
-        $sql = "SELECT t1.*, t2.`lat` FROM `events_list` AS t1 LEFT JOIN `markers` AS t2 ON t1.`date` = t2.`date` WHERE MONTH(t1.`date`) = $date ";
+        $sql = "SELECT t1.*, t2.`lat`, `address` FROM `events_list` AS t1 LEFT JOIN `markers` AS t2 ON t1.`date` = t2.`date` WHERE MONTH(t1.`date`) = $date ";
         $evt = $this->fetch($sql);
         
         $result_test = $evt;

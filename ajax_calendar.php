@@ -144,6 +144,7 @@ switch ($_POST['req'])
     <?php 
         foreach ($list_events as $k => $v) 
             {
+                // var_dump($v);
             $replaced = str_replace('-', '', $v['date']);
             ?>
 
@@ -151,7 +152,7 @@ switch ($_POST['req'])
             <td><?php echo $v['date'] ?></td>
             <td><?php echo $v['details'] ?></td>
             <td><?php echo $v['map'] ?></td>
-            <td><?php echo $v['link'] ?></td>
+            <td><?php echo $v['address'] ?></td>
             <td>
             <?php
             if ($v['lat']) 
@@ -199,7 +200,11 @@ switch ($_POST['req'])
             <textarea id="map_event"><?php echo ($map==false) ? '' : $map ; ?></textarea>
         </div>
         <div class="left ml_10">
-            <span>GPS</span>
+        <div class="tooltip">GPS
+            <span class="tooltiptext">You must enter the full GPS coordinates<br>
+                                        example: <b style="color:red"> 42.716856, 23.408525 </b> </span>
+        </div>
+            <!-- <span>GPS</span> -->
             <?php
             if ($gps) 
                 {
@@ -209,12 +214,23 @@ switch ($_POST['req'])
                 }
             ?>
             <div class="clear"></div>
-            <input id="gps_event" class="left mt_10" type="text" value="<?php echo ($gps == false) ? '' : $gps . ', ' . $lng ; ?>">
+            <input id="gps_event" class="left mt_10" type="text" value="<?php echo ($gps == false) ? '' : $gps . ', ' . $lng ; ?>" pattern=".{20,}" title="Must be 20 chars" maxlength="20">
+
             <!-- hidden input -->
             <input  id="lng_event" style="display:none" type="text" value="<?php echo ($lng == false) ? '' : $lng ; ?>">
         </div>
+
+
         <div class="left ml_10">
             <span>Link</span>
+        <?php
+            if ($link) 
+                {
+            ?>
+                <a href="<?php echo $link ?>" class="button_info small_btn_info mt-5 ml_10">Go to link</a>
+            <?php
+                }
+            ?>
             <div class="clear"></div>
             <input id="link_event" class="mt_10" type="text" value="<?php echo ($link==false) ? '' : $link ; ?>">
         </div>
